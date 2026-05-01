@@ -1,0 +1,10 @@
+.vs/
+**/bin/
+**/obj/
+*.user
+*.suo
+*.cache
+*.db
+
+# Local-only overrides (keep appsettings.json as non-secret template)
+**/appsettings.Development.json

@@ -1,0 +1,23 @@
+name: ci-no-cqrs
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    env:
+      UseCqrs: "false"
+    defaults:
+      run:
+        working-directory: MicroservisApp
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+      - run: dotnet restore MicroservisApp.sln
+      - run: dotnet build MicroservisApp.sln -c Release --no-restore
+      - run: dotnet test src/Order.API.Tests/Order.API.Tests.csproj -c Release --no-build
+      - run: dotnet test src/Stock.API.Tests/Stock.API.Tests.csproj -c Release --no-build
