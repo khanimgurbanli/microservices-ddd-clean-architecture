@@ -1,28 +1,60 @@
 <div align="center">
   <h1>MicroservisApp — Order / Stock / Payment</h1>
-  <p>DDD + Clean Architecture + EDA (RabbitMQ/MassTransit) + Result Pattern, CQRS optional</p>
+  <p><b>DDD</b> + <b>Clean Architecture</b> + <b>EDA</b> (RabbitMQ/MassTransit) + <b>Result Pattern</b>, CQRS optional</p>
   <p>
-    <a href="#az"><img alt="AZ" src="https://img.shields.io/badge/Language-AZ-blue"></a>
-    <a href="#en"><img alt="EN" src="https://img.shields.io/badge/Language-EN-green"></a>
+    <a href="#azərbaycan-dili"><img alt="AZ" src="https://img.shields.io/badge/README-AZ-blue"></a>
+    <a href="#english"><img alt="EN" src="https://img.shields.io/badge/README-EN-green"></a>
+    <a href=".github/workflows/ci-cqrs.yml"><img alt="CI (CQRS)" src="https://img.shields.io/badge/CI-CQRS-lightgrey"></a>
+    <a href=".github/workflows/ci-no-cqrs.yml"><img alt="CI (no CQRS)" src="https://img.shields.io/badge/CI-no%20CQRS-lightgrey"></a>
   </p>
 </div>
 
-> Qeyd: GitHub README-də JavaScript icazə verilmədiyi üçün “real toggle switch” (səhifədə gizlət/göstər) qurmaq mümkün deyil. Buradakı düymələr eyni sənəddə müvafiq dil bölməsinə keçid edir.
+> Qeyd: GitHub README JavaScript-i blokladığı üçün “real toggle” (UI-da gizlət/göstər) mümkün deyil. Dil dəyişmək üçün yuxarıdakı AZ/EN düymələri müvafiq bölməyə keçir.
 
----
+***
 
-<a id="az"></a>
+## Contents
+
+- [Quick links](#quick-links)
+- [Azərbaycan dili](#azərbaycan-dili)
+- [English](#english)
+
+***
+
+## Quick links
+
+- Architecture: [docs/cqrs-dispatching.md](docs/cqrs-dispatching.md)
+- CI: [ci-cqrs.yml](.github/workflows/ci-cqrs.yml), [ci-no-cqrs.yml](.github/workflows/ci-no-cqrs.yml)
+- Services: [Order.API](src/Order.API), [Stock.API](src/Stock.API), [Payment.API](src/Payment.API)
+
+***
 
 ## Azərbaycan dili
 
-### Layihənin məqsədi
+### Məqsəd
 
 Bu repo **Order**, **Stock**, **Payment** mikroservisləri üzərində “production-ready” arxitektura nümayişidir:
 
 - Biznes məntiqini domain-də saxlamaq (DDD), use-case-ləri tətbiq qatında modelləmək (Clean Architecture).
 - Servislərarası əlaqəni event-driven şəkildə qurmaq (EDA) və coupling-i azaltmaq.
 - Error handling-i standartlaşdırmaq (Result pattern + `DomainError`).
-- CQRS/MediatR-dan asılılığı “opsional” etmək: CQRS söndürülsə belə sistem compile/runtime problem olmadan işləsin.
+- CQRS/MediatR-dan asılılığı opsional etmək: CQRS söndürülsə belə sistem compile/runtime problem olmadan işləsin.
+
+### Mündəricat
+
+- [Yüksək səviyyə diaqram](#yüksək-səviyyəli-arxitektura-diaqramı)
+- [Repo strukturu](#repo-strukturu)
+- [Texnologiyalar](#istifadə-olunan-texnologiyalar-və-seçim-səbəbləri)
+- [Design pattern-lər və qərarlar](#design-pattern-lər-və-arxitektura-qərarları)
+- [Scalability](#miqyaslana-bilərlik-scalability)
+- [Security](#təhlükəsizlik-yanaşmaları)
+- [Performance](#performans-optimizasiyaları)
+- [Testing](#testing-strategiyası)
+- [CI/CD](#cicd-pipeline)
+- [Deployment](#deployment-prosesi-repo-vəziyyətinə-uyğun)
+- [Monitoring & Logging](#monitorinq-və-logging)
+- [Risklər](#potensial-risklər-və-idarə-olunması)
+- [Alternativlər](#alternativlər-qısa-analiz)
 
 ### Yüksək səviyyəli arxitektura diaqramı
 
@@ -163,9 +195,7 @@ Bu repo docker/k8s manifestləri daşımır. Deployment üçün tipik yanaşma:
 - EDA yerinə sync HTTP: sadə başlama, amma coupling və latency riskləri daha çox.
 - Result pattern yerinə exception-driven flow: daha az kod, amma error mapping və observability standartlaşması çətinləşir.
 
----
-
-<a id="en"></a>
+***
 
 ## English
 
@@ -177,6 +207,20 @@ This repository is a **production-minded architecture showcase** for three micro
 - Reduce coupling via event-driven integration (EDA).
 - Standardize error handling (Result pattern + `DomainError`).
 - Make CQRS optional: the system must continue working without compile/runtime failures when CQRS is disabled or removed.
+
+### Table of contents
+
+- [High-level diagram](#high-level-architecture-diagram)
+- [Technology stack](#technology-stack-and-why)
+- [Patterns & decisions](#patterns--key-decisions-with-alternatives)
+- [Scalability](#scalability)
+- [Security](#security-posture)
+- [Performance](#performance)
+- [Testing](#testing-strategy)
+- [CI/CD](#cicd)
+- [Deployment](#deployment-as-is)
+- [Monitoring & logging](#monitoring--logging)
+- [Risks](#risks--mitigation)
 
 ### High-level architecture diagram
 
@@ -293,5 +337,3 @@ This repo does not include Docker/K8s manifests. A typical deployment approach:
 - Secret leakage → secret scanning, rotation, env-based config.
 - Contract drift → versioning and backward compatible integration events.
 
-#   m i c r o s e r v i c e s - d d d - c l e a n - a r c h i t e c t u r e  
- 
