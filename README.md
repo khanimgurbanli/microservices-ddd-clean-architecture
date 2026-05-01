@@ -9,7 +9,6 @@
   </p>
 </div>
 
-> Qeyd: GitHub README JavaScript-i blokladığı üçün “real toggle” (UI-da gizlət/göstər) mümkün deyil. Dil dəyişmək üçün yuxarıdakı AZ/EN düymələri müvafiq bölməyə keçir.
 
 ***
 
